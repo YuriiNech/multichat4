@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Clear{% endblock %}
+{% block header_text %}Clear{% endblock %}
+
+{% block content %}
+<p> {{user_count}} users</p>
+<p> {{chat_count}} entries in common chat</p>
+<p> {{privat_chat_count}} entries in private chats</p>
+<p> {{privat_chat_name_count}} private chats</p>
+<p> {{file_size}} Mb  Size of DB-file</p>
+
+
+    <form action="/clear_db/" method="POST">
+        {% csrf_token %}
+        <button>Clear_DB</button>
+    </form>
+<p> Clear DB from messages over 365 days old</p>
+{% endblock %}

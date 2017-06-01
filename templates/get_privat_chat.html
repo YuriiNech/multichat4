@@ -1,0 +1,69 @@
+{%extends "base.html" %}
+
+{% block title %}Get Private Chat{% endblock %}
+{% block extra_head %}
+     <script>
+
+
+        var choose = function(id, name){
+
+            document.getElementById('chat_id').value = id;
+            document.getElementById('chat_name').value = name;
+            $('#choose_form').submit();
+
+        };
+     </script>
+{% endblock %}
+{% block content %}
+<p style="color:blue">You can create a new chat with selected users or choose an existing chat</p>
+
+<form action="{{'/privat_chat/' }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="chat_name" required placeholder="Name for private chat" type="text"/>
+            </div>
+            <div class="form-group">
+                <p><select style="min-width: 100%;"required size="10" multiple="multiple" name="users">
+                    {%for user in userset%}
+    `                   <option value={{user.id}}> {{user.username}} </option>
+                    {%endfor%}
+                </select></p>
+            </div>
+            <div class="form-group">
+                <button class="btnCreate" type="submit">Create</button>
+            </div>
+            {% csrf_token %}
+        </fieldset>
+
+    </form>
+
+<p style="color:blue">Choose an existing chat</p>
+
+<div style="min-height: 160px; max-height: 160px; overflow-y: auto; background-color: #f8f8f8">
+
+        {%for chat in chatset%}
+            {%if chat.2 %}
+                <li><a href="#" style="color:red" onclick="choose({{chat.0}},'{{chat.1}}');return false"> {{chat.1}} </a></li>
+            {%else%}
+                <li><a href="#"  onclick="choose({{chat.0}},'{{chat.1}}');return false"> {{chat.1}} </a></li>
+            {%endif%}
+            {% empty %}
+                <p class = "empty"> You do not have private chats</p>
+        {%endfor%}
+
+</div>
+
+ <form id="choose_form" action="{{'/privat_chat/' }}" method="post">
+
+    <div style = "display:none;">
+    <input id="chat_name" name="chat_name" value="" type="text"/>
+    <input id="chat_id" name="chat_id" value="" type="text"/>
+
+        <button id="btnGo" type="submit">Go</button>
+    </div>
+    {% csrf_token %}
+
+
+    </form>
+{% endblock %}
+

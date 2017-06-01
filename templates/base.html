@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+
+    <!-- documentation at http://getbootstrap.com/, alternative themes at https://www.bootstrapcdn.com/bootswatch/ -->
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet"/>
+
+    <link href="{% static 'styles.css' %}"  rel="stylesheet">
+
+
+    <script src="{% static 'jquery-3.1.1.min.js' %}"></script>
+
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+
+
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="{% static 'html5shiv.js' %}"></script>
+  <script src="{% static 'respond.min.js' %}"></script>
+<![endif]-->
+
+	{% block extra_head %}{% endblock %}
+</head>
+<body>
+	<div class="container">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand" href="{% url 'admin:index' %}"><span class="blue">C</span><span class="red">H</span><span class="yellow">A</span><span class="green">T</span> <span class="red">Юрий</span></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        {% if log %}
+                            <ul class="nav navbar-nav">
+								<li ><a id ="privat_chat_color" href="/get_privat_chat">Private Chat</a></li>
+                                {% if chat %}
+                                    <li><a href="/chat">Common Chat</a></li>
+                                {% endif %}
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a  style="color:blue;"> {{ username }}</a></li>
+                                <li><a href="/change_password">Change Password</a></li>
+                                <li><a href="/logout">Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li><a href="/chat">Chat</a></li>
+                                <li><a href="/register">Register</a></li>
+                                <li><a href="/login">Log In</a></li>
+
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+
+	<header>
+		<h1>{% block header_text %}{% endblock %}</h1>
+	</header>
+	<section>
+		{% block content %}
+		{% endblock %}
+	</section>
+	{% block extra_body %}{% endblock %}
+</body>
+</html>
