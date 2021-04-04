@@ -136,7 +136,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'asgi_redis.RedisChannelLayer',
         'CONFIG': {
-             "hosts": [os.environ.get('HEROKU_REDIS_GRAY_URL', 'redis://localhost:6379')],
+             "hosts": [os.environ.get('HEROKU_REDIS_URL', 'redis://localhost:6379')],
         },
         'ROUTING': 'chatproject.routing.channel_routing' ,
     },
