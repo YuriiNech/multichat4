@@ -17,6 +17,6 @@ six==1.10.0
 Twisted==20.3.0
 txaio==2.7.0
 whitenoise==3.3.0
-zope.interface==4.4.0
+zope.interface==4.4.2
 psycopg2-binary==2.8.6
 django-redis-cache==1.7.1
