@@ -14,7 +14,7 @@ msgpack-python==0.4.8
 pytz==2017.2
 redis==2.10.5
 six==1.10.0
-Twisted==20.3.0
+Twisted==22.1.0
 txaio==2.7.0
 whitenoise==3.3.0
 zope.interface==4.4.2
